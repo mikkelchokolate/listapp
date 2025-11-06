@@ -50,37 +50,51 @@ fun ListApp() {
             FloatingActionButton(onClick = { itemsCount++ }) {
                 Text("+", fontSize = 24.sp)
             }
-        }
+        },
+        floatingActionButtonPosition = FabPosition.End
     ) { innerPadding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(columns),
-            contentPadding = PaddingValues(
-                start = 8.dp,
-                end = 8.dp,
-                top = innerPadding.calculateTopPadding() + 8.dp,   // верхний зазор
-                bottom = innerPadding.calculateBottomPadding() + 72.dp // нижний зазор
-            ),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.systemBars)
+                .background(Color.White)
+                .padding(innerPadding)
         ) {
-            items(count = itemsCount) { index ->
-                Box(
-                    modifier = Modifier
-                        .aspectRatio(1f) // квадраты
-                        .background(if (index % 2 == 0) Color.Red else Color.Blue),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = index.toString(),
-                        color = Color.White,
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center
-                    )
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(columns),
+                contentPadding = PaddingValues(
+                    start = 8.dp,
+                    end = 8.dp,
+                    top = 8.dp,
+                    bottom = 80.dp
+                ),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(count = itemsCount) { index ->
+                    Box(
+                        modifier = Modifier
+                            .aspectRatio(1f)
+                            .background(if (index % 2 == 0) Color.Red else Color.Blue),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = index.toString(),
+                            color = Color.White,
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
+
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(88.dp)
+                    .background(Color.White)
+            )
         }
     }
 }
